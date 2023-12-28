@@ -10,9 +10,12 @@ import SwiftData
 
 @main
 struct where2goOzApp: App {
+    
+    @StateObject private var locationManager = LocationManager.shared
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Attraction.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -26,6 +29,7 @@ struct where2goOzApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(locationManager)
         }
         .modelContainer(sharedModelContainer)
     }

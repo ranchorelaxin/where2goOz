@@ -10,16 +10,17 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @EnvironmentObject var locationManager: LocationManager
+    @Query private var attractions: [Attraction]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(attractions) { attraction in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        AttractionView(attraction: attraction)
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(attraction.name)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -37,19 +38,31 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .onAppear {
+            
+            locationManager.requestPermission()
+            
+        }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            for i in 0...3 {
+                modelContext.delete(attractions[i])
+            }
+            
+            for i in 0...3 {
+                let newItem = Attraction.attractions[i]
+                modelContext.insert(newItem)
+            }
+            
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(attractions[index])
             }
         }
     }
@@ -57,5 +70,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Attraction.self, inMemory: true)
 }
