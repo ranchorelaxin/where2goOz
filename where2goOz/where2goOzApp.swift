@@ -32,6 +32,6 @@ struct where2goOzApp: App {
             MainView()
                 .environmentObject(locationManager)
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(sharedModelContainer)//
     }
 }
