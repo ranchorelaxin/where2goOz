@@ -11,9 +11,9 @@ import SwiftData
 @Model
 final class AttractionType {
 
-    var name: String
-    var image: String
-    var attractions: [Attraction]
+    var name: String = ""
+    var image: String = ""
+    var attractions: [Attraction]?
     
     init(name: String, image: String, attractions: [Attraction]) {
 

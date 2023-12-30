@@ -12,6 +12,7 @@ struct AttractionView: View {
     
     @State var attraction: Attraction
     @State var address: String = ""
+    private let sectionFont = Font.title2.lowercaseSmallCaps().bold()
     
     var body: some View {
         ScrollView {
@@ -19,14 +20,19 @@ struct AttractionView: View {
             Map(initialPosition: MapCameraPosition.region(MKCoordinateRegion(center: attraction.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)), interactionModes: MapInteractionModes()) {
                 
                 Marker("\(attraction.name)", coordinate: attraction.coordinate)
-                .tint(.green)
+                    .tint(attraction.isComplete() ? Color.theme.greenColor : Color.theme.redColor)
                 
             }
             .frame(height: 250)
             .ignoresSafeArea()
+            .overlay(alignment: .bottom) {
+                    AttractionImageIconView(attraction: $attraction, size: 100)
+                        .offset(y: 50)
+            }
             
             VStack {
                 Text("\(attraction.name)")
+                    .multilineTextAlignment(.center)
                     .bold()
                     .font(.title)
                 
@@ -39,6 +45,7 @@ struct AttractionView: View {
                     
                 }
             }
+            .padding(.top, 50)
             .padding()
             
             VStack {
@@ -65,6 +72,39 @@ struct AttractionView: View {
                 MapRouteView(attraction: attraction)
                 
             }
+            
+            VStack(alignment: .leading, spacing: 15) {
+                
+                HStack {
+                    Text("Licencing")
+                        .font(sectionFont)
+                    Spacer()
+                }
+                
+                if attraction.imageCredit != nil {
+                    
+                    HStack {
+                        Text("Photo credit: \(attraction.imageCredit!)")
+                            .font(.caption)
+                            .italic()
+                        
+                        Spacer()
+                    }
+                }
+                
+                HStack(spacing: 2) {
+                    Text("Icons by ")
+                    
+                    Link(destination: URL(string: "https://icons8.com")!, label: {
+                        Text("Icons8.com")
+                            .underline()
+                    })
+                    
+                    Spacer()
+                }
+                .font(.caption)
+            }
+            .padding()
             
             Spacer()
         }

@@ -10,9 +10,9 @@ import SwiftData
 
 @Model
 final class CompletionData {
-    var id: UUID
+    var id: UUID = UUID()
     var attraction: Attraction?
-    var timestamp: Date
+    var timestamp: Date = Date()
     var rating: Double?
     var comments: String?
     

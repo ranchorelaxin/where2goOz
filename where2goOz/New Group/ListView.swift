@@ -34,28 +34,15 @@ struct ListView: View {
             .listStyle(.inset)
             
             .toolbar {
-                /*
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
-                }*/
+                }
                 ToolbarItem {
                     Button(action: addData) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
-                 /*
-                ToolbarItem {
-                    Button(action: addCompletion) {
-                        Label("Toggle", systemImage: "c.circle")
-                    }
-                }
-                
-                ToolbarItem {
-                    Button(action: removeCompletion) {
-                        Label("Toggle", systemImage: "r.circle")
-                    }
-                }
-                  */
             }
         } detail: {
             Text("Select an item")
@@ -91,8 +78,8 @@ struct ListView: View {
             modelContext.insert(natural)
             modelContext.insert(lookouts)
             
-            attraction.attractionTypes.append(natural)
-            attraction.attractionTypes.append(lookouts)
+            attraction.attractionTypes!.append(natural)
+            attraction.attractionTypes!.append(lookouts)
 
             
             // insert 12 apostles
@@ -102,9 +89,9 @@ struct ListView: View {
             modelContext.insert(attraction)
             modelContext.insert(beaches)
             
-            attraction.attractionTypes.append(beaches)
-            attraction.attractionTypes.append(lookouts)
-            attraction.attractionTypes.append(natural)
+            attraction.attractionTypes!.append(beaches)
+            attraction.attractionTypes!.append(lookouts)
+            attraction.attractionTypes!.append(natural)
             
             // insert whale sharks
             attraction = Attraction.attractions[2]
@@ -119,36 +106,36 @@ struct ListView: View {
             modelContext.insert(snorkel)
             modelContext.insert(experience)
             
-            attraction.attractionTypes.append(fauna)
-            attraction.attractionTypes.append(swimming)
-            attraction.attractionTypes.append(snorkel)
-            attraction.attractionTypes.append(experience)
+            attraction.attractionTypes!.append(fauna)
+            attraction.attractionTypes!.append(swimming)
+            attraction.attractionTypes!.append(snorkel)
+            attraction.attractionTypes!.append(experience)
             
             
             // insert Bondi Beach
             attraction = Attraction.attractions[3]
             modelContext.insert(attraction)
             
-            attraction.attractionTypes.append(swimming)
-            attraction.attractionTypes.append(beaches)
+            attraction.attractionTypes!.append(swimming)
+            attraction.attractionTypes!.append(beaches)
 
             // Insert Harbour Bridge
             attraction = Attraction.attractions[4]
             let transport = AttractionType(name: "Transport", image: "transport", attractions: [])
             modelContext.insert(attraction)
             
-            attraction.attractionTypes.append(transport)
+            attraction.attractionTypes!.append(transport)
 
             // insert Hozier lane
             attraction = Attraction.attractions[5]
-            let arts = AttractionType(name: "The Arts", image: "thearts", attractions: [])
+            let arts = AttractionType(name: "Visual Arts", image: "visualarts", attractions: [])
             modelContext.insert(attraction)
-            attraction.attractionTypes.append(arts)
+            attraction.attractionTypes!.append(arts)
             
             // insert Great White
             attraction = Attraction.attractions[6]
             modelContext.insert(attraction)
-            attraction.attractionTypes.append(fauna)
+            attraction.attractionTypes!.append(fauna)
             
             do {
                 try modelContext.save()

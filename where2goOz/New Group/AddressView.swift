@@ -17,9 +17,13 @@ struct AddressView: View {
             if address != nil {
                 Text("\(address ?? "No address")")
                     .font(Font.caption.lowercaseSmallCaps())
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
                     .italic()
+                    
             }
         }
+        .padding(.horizontal)
         .onAppear(perform: {
             updateAddress()
         })

@@ -17,36 +17,15 @@ struct ListTileView: View {
     var body: some View {
         VStack {
             HStack {
-                Image("\(attraction.name)")
-                    .frame(width: 70, height: 70)
-                    .background(.regularMaterial)
-                    .clipShape(Circle())
-                    .overlay{
-                        attraction.isComplete() ?
-                        Circle()
-                            .stroke(Color.theme.greenColor, lineWidth: 4):
-                        Circle()
-                            .stroke(Color.theme.redColor, lineWidth: 4)
-                    }
+                AttractionImageIconView(attraction: $attraction, size: 70)
                 
-                VStack(alignment: .leading) {
-                    Text("#\(attraction.rank)")
-                        .font(.title).bold()
-                    
-                    Text("\(attraction.name)")
-                        .font(Font.title3.lowercaseSmallCaps())
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                    
-                    Text("\(attraction.getDistance(destinationLatitude: locationManager.coordinates.latitude, destinationLongitude: locationManager.coordinates.longitude).string)")
-                        .font(.subheadline)
-                }
+                AttractionSummaryView(attraction: $attraction)
                 
                 Spacer()
 
             }
         }
-        .frame(height: 80)
+        .frame(height: 70)
         .padding(.vertical)
         .padding(.leading, 4)
         .swipeActions(edge: .leading, allowsFullSwipe: false) {

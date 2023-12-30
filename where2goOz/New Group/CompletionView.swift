@@ -29,7 +29,7 @@ struct CompletionView: View {
             ForEach(types) { type in
                 HStack {
                     Text("\(type.name)")
-                    Text("\(type.attractions.count)")
+                    Text("\(type.attractions?.count ?? 0)")
                     
                 }
             }
@@ -39,7 +39,7 @@ struct CompletionView: View {
             ForEach(attractions) { attraction in
                 HStack {
                     Text("\(attraction.name)")
-                    Text("\(attraction.attractionTypes.count)")
+                    Text("\(attraction.attractionTypes?.count ?? 0)")
                     
                 }
             }

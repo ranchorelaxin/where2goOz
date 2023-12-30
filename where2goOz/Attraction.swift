@@ -11,24 +11,26 @@ import MapKit
 
 @Model
 final class Attraction {
-    var id: UUID
-    var name: String
+    var id: UUID = UUID()
+    var name: String = ""
     var alternateNames: [String]?
-    var icon: String
-    var latitude: Double
+    var icon: String = ""
+    var imageCredit: String?
+    var latitude: Double = 0
     var links: [String]?
-    var longitude: Double
-    var summary: String
-    var rankValue: Double
+    var longitude: Double = 0
+    var summary: String = ""
+    var rankValue: Double = 0
     var rank: Int = 999
-    @Relationship(inverse: \AttractionType.attractions) var attractionTypes: [AttractionType]
-    var completionData: CompletionData?
+    @Relationship(inverse: \AttractionType.attractions) var attractionTypes: [AttractionType]?
+    @Relationship(inverse: \CompletionData.attraction) var completionData: CompletionData?
     
-    init(id: UUID, name: String, alternateNames: [String]? = nil, icon: String, latitude: Double, links: [String]? = nil, longitude: Double, summary: String, rankValue: Double, attractionTypes: [AttractionType]) {
+    init(id: UUID, name: String, alternateNames: [String]? = nil, icon: String, imageCredit: String? = nil, latitude: Double, links: [String]? = nil, longitude: Double, summary: String, rankValue: Double, attractionTypes: [AttractionType]) {
         self.id = id
         self.name = name
         self.alternateNames = alternateNames
         self.icon = icon
+        self.imageCredit = imageCredit
         self.latitude = latitude
         self.links = links
         self.longitude = longitude
@@ -41,6 +43,15 @@ final class Attraction {
         
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
+    }
+    
+    static func hasThumbnail(id: String) -> Bool {
+        
+        if let _ = UIImage(named: id) {
+            return true
+        }
+        
+        return false
     }
     
     public func getDistance(destinationLatitude: Double, destinationLongitude: Double) -> (value: Double, string: String) {
@@ -80,7 +91,7 @@ final class Attraction {
  extension Attraction {
  static var attractions: [Attraction] =
  [
-    Attraction.init(id: UUID(uuidString: "D02DE922-ECD1-47E0-A57C-0497540F4DDF")!, name: "Uluru", alternateNames: ["Ayres Rock"], icon: "mountains", latitude: -25.335509752305455, links: ["https://en.wikipedia.org/wiki/Uluru", "https://www.instagram.com/exploreuluru", "#uluru"], longitude: 131.0044893432509, summary: "Uluru (/ˌuːləˈruː/; Pitjantjatjara: Uluṟu [ˈʊlʊɻʊ]), also known as Ayers Rock (/ˈɛərz/ AIRS) and officially gazetted as Uluru / Ayers Rock,[1] is a large sandstone formation in the centre of Australia. It is in the southern part of the Northern Territory, 335 km (208 mi) south-west of Alice Springs.\n\nUluru is sacred to the Pitjantjatjara, the Aboriginal people of the area, known as the Aṉangu. The area around the formation is home to an abundance of springs, waterholes, rock caves and ancient paintings. Uluru is listed as a UNESCO World Heritage Site. Uluru and Kata Tjuta, also known as the Olgas, are the two major features of the Uluṟu-Kata Tjuṯa National Park.\n\nUluru is one of Australia's most recognisable natural landmarks and has been a popular destination for tourists since the late 1930s. It is also one of the most important indigenous sites in Australia.", rankValue: 100, attractionTypes: []),
+    Attraction.init(id: UUID(uuidString: "D02DE922-ECD1-47E0-A57C-0497540F4DDF")!, name: "Uluru", alternateNames: ["Ayres Rock"], icon: "mountains", imageCredit: "Steven La Rose", latitude: -25.335509752305455, links: ["https://en.wikipedia.org/wiki/Uluru", "https://www.instagram.com/exploreuluru", "#uluru"], longitude: 131.0044893432509, summary: "Uluru (/ˌuːləˈruː/; Pitjantjatjara: Uluṟu [ˈʊlʊɻʊ]), also known as Ayers Rock (/ˈɛərz/ AIRS) and officially gazetted as Uluru / Ayers Rock,[1] is a large sandstone formation in the centre of Australia. It is in the southern part of the Northern Territory, 335 km (208 mi) south-west of Alice Springs.\n\nUluru is sacred to the Pitjantjatjara, the Aboriginal people of the area, known as the Aṉangu. The area around the formation is home to an abundance of springs, waterholes, rock caves and ancient paintings. Uluru is listed as a UNESCO World Heritage Site. Uluru and Kata Tjuta, also known as the Olgas, are the two major features of the Uluṟu-Kata Tjuṯa National Park.\n\nUluru is one of Australia's most recognisable natural landmarks and has been a popular destination for tourists since the late 1930s. It is also one of the most important indigenous sites in Australia.", rankValue: 100, attractionTypes: []),
  
     Attraction.init(id: UUID(uuidString: "FF3838A8-E033-4E00-9E97-56159921F5F2")!, name: "The Twelve Apostles", icon: "lookouts", latitude: -38.664335994298526, links: ["https://en.wikipedia.org/wiki/The_Twelve_Apostles_(Victoria)", "https://www.instagram.com/visit12apostles", "#12apostles"],longitude: 143.1038148917011, summary: "The Twelve Apostles are a collection of limestone stacks off the shore of Port Campbell National Park, by the Great Ocean Road in Victoria, Australia. The Twelve Apostles are located on the traditional lands of the Eastern Maar peoples.\n\nTheir proximity to one another has made the site a popular tourist attraction. Eight of the original nine stacks remain standing at the Twelve Apostles' viewpoint, after one collapsed in July 2005. Though the view from the promontory by the Twelve Apostles never included twelve stacks, additional stacks —not considered part of the Apostles group— are located to the west within the national park", rankValue: 99.5, attractionTypes: []),
  
