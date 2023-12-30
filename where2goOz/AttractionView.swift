@@ -10,7 +10,7 @@ import MapKit
 
 struct AttractionView: View {
     
-    public var attraction: Attraction
+    @State var attraction: Attraction
     @State var address: String = ""
     
     var body: some View {
@@ -41,10 +41,15 @@ struct AttractionView: View {
             }
             .padding()
             
-            Text("\(address)")
-                .font(.caption)
-                .italic()
-                .padding(.horizontal)
+            VStack {
+                 AddressView(attraction: attraction)
+            }
+            
+            VStack {
+                
+                AttractionTypeView(attraction: attraction)
+                
+            }
             
             Text("\(attraction.summary)")
                 .padding()
@@ -58,62 +63,15 @@ struct AttractionView: View {
             VStack {
                 
                 MapRouteView(attraction: attraction)
+                
             }
-            
             
             Spacer()
         }
-        .onAppear(perform: {
-            updateAddress()
-        })
-    }
-    
-    func updateAddress() {
-        
-        let geocoder = CLGeocoder()
-        
-        // Look up the location and pass it to the completion handler
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: attraction.latitude, longitude: attraction.longitude)) { placemark, error in
-            if error == nil {
-                let mark = placemark![0]
-                
-                
-                
-                address = "\(mark.description)"
-                
-                if mark.name != nil {
-                    address = mark.name!
-                }
-                
-                if mark.locality != nil {
-                    address = address + ", " + mark.locality!
-                }
-                
-                if mark.administrativeArea != nil {
-                    address = address + ", " + mark.administrativeArea!
-                }
-                
-                
-                
-                //print("\(placemark1?.country)")
-            }
-            else {
-                
-            }
-        }
-        
     }
 }
 
 #Preview {
-    AttractionView(attraction:Attraction.attractions[0], address: "Address")
-
-}
-
-#Preview {
-    AttractionView(attraction:Attraction.attractions[1], address: "Address")
-}
-
-#Preview {
-    AttractionView(attraction:Attraction.attractions[2], address: "Address")
+    AttractionView(attraction: Attraction.attractions[0])
+        .environmentObject(LocationManager.shared)
 }

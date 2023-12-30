@@ -15,8 +15,9 @@ struct where2goOzApp: App {
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Attraction.self,
+            Attraction.self, CompletionData.self, AttractionType.self
         ])
+        
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
@@ -28,7 +29,7 @@ struct where2goOzApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environmentObject(locationManager)
         }
         .modelContainer(sharedModelContainer)
