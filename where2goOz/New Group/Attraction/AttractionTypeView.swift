@@ -32,24 +32,7 @@ struct AttractionTypeView: View {
         }
         .padding(.top)
         .padding(.horizontal)
-        /*
-        HStack(spacing: 10) {
-            ForEach(attraction.attractionTypes ?? []) { type in
-                
-                HStack {
-                    Image(type.image)
-                        .frame(width: 25)
-                    
-                    Text("\(type.name)")
-
-                }
-                .font(.caption)
-                
-            }
-        }
-        .padding()
-        .fixedSize(horizontal: false, vertical: true)
-         */
+        
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2A11E42B4184C800049A7C /* MapCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2A11E32B4184C800049A7C /* MapCaptionView.swift */; };
+		0D2A11E62B419D6F00049A7C /* AttractionLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2A11E52B419D6F00049A7C /* AttractionLinksView.swift */; };
 		0D2E34132B3E7DE000105328 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34122B3E7DE000105328 /* CompletionView.swift */; };
 		0D2E34152B3E887500105328 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34142B3E887500105328 /* AddressView.swift */; };
 		0D2E34172B3E8A8100105328 /* AttractionTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34162B3E8A8100105328 /* AttractionTypeView.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D2A11E32B4184C800049A7C /* MapCaptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCaptionView.swift; sourceTree = "<group>"; };
+		0D2A11E52B419D6F00049A7C /* AttractionLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionLinksView.swift; sourceTree = "<group>"; };
 		0D2E34122B3E7DE000105328 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
 		0D2E34142B3E887500105328 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		0D2E34162B3E8A8100105328 /* AttractionTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionTypeView.swift; sourceTree = "<group>"; };
@@ -87,8 +91,8 @@
 		0D471F412B3AA386000899A0 /* where2goOz */ = {
 			isa = PBXGroup;
 			children = (
-				0D82AC6E2B41171F005EBD31 /* Models */,
 				0D471F422B3AA386000899A0 /* where2goOzApp.swift */,
+				0D82AC6E2B41171F005EBD31 /* Models */,
 				0DB302272B403B8A00EB1A31 /* Views */,
 				0D3EEC0B2B3D3A99003DFEF7 /* LocationManager.swift */,
 				0D3EEC132B3DA1A8003DFEF7 /* Extensions.swift */,
@@ -122,6 +126,7 @@
 			children = (
 				0D3EEC0F2B3D9131003DFEF7 /* MapView.swift */,
 				0D82AC6F2B4119B5005EBD31 /* MapAttractionPin.swift */,
+				0D2A11E32B4184C800049A7C /* MapCaptionView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				0D471F5A2B3ABDC8000899A0 /* AttractionView.swift */,
+				0D2A11E52B419D6F00049A7C /* AttractionLinksView.swift */,
 				0D2E34162B3E8A8100105328 /* AttractionTypeView.swift */,
 				0D2E34142B3E887500105328 /* AddressView.swift */,
 				0D3EEC092B3D312C003DFEF7 /* MapRouteView.swift */,
@@ -247,12 +253,14 @@
 				0D471F592B3AAF1A000899A0 /* AttractionType.swift in Sources */,
 				0D3EEC162B3DA2AB003DFEF7 /* CompletionData.swift in Sources */,
 				0D471F452B3AA386000899A0 /* ListView.swift in Sources */,
+				0D2A11E42B4184C800049A7C /* MapCaptionView.swift in Sources */,
 				0D471F432B3AA386000899A0 /* where2goOzApp.swift in Sources */,
 				0D3EEC0A2B3D312C003DFEF7 /* MapRouteView.swift in Sources */,
 				0DB56FE32B4050B100A73BAA /* AttractionSummaryView.swift in Sources */,
 				0D471F5B2B3ABDC8000899A0 /* AttractionView.swift in Sources */,
 				0DB56FDC2B403C9D00A73BAA /* MainView.swift in Sources */,
 				0D3EEC142B3DA1A8003DFEF7 /* Extensions.swift in Sources */,
+				0D2A11E62B419D6F00049A7C /* AttractionLinksView.swift in Sources */,
 				0D82AC702B4119B5005EBD31 /* MapAttractionPin.swift in Sources */,
 				0D3EEC122B3D9445003DFEF7 /* ListTileView.swift in Sources */,
 				0D3EEC102B3D9131003DFEF7 /* MapView.swift in Sources */,

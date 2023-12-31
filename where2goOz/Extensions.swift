@@ -13,14 +13,11 @@ extension Color {
     static let theme = ColorTheme()
     
     struct ColorTheme {
-        let accent = Color("AccentColor")
-        let background = Color("BackgroundColor")
-        let greenColor = Color("GreenColor")
-        let redColor = Color("RedColor")
-        let blueColor = Color("BlueColor")
-        let secondaryText = Color("SecondaryTextColor")
-        let gradientStart = Color("GradientStart")
-        let gradientEnd = Color("GradientEnd")
+        let accent = Color("appAccent")
+        let background = Color("appBackground")
+        let greenColor = Color("appGreen")
+        let redColor = Color("appRed")
+        let blueColor = Color("appBlue")
     }
 }
 

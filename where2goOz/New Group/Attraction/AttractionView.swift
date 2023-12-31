@@ -42,7 +42,6 @@ struct AttractionView: View {
                         Text(" \(altName) ")
                             .italic()
                     }
-                    
                 }
             }
             .padding(.top, 50)
@@ -71,6 +70,10 @@ struct AttractionView: View {
                 
                 MapRouteView(attraction: attraction)
                 
+            }
+            
+            if attraction.links != nil {
+                AttractionLinksView(links: attraction.links!)
             }
             
             VStack(alignment: .leading, spacing: 15) {

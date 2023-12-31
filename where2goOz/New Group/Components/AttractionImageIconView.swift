@@ -27,7 +27,7 @@ struct AttractionImageIconView: View {
             } else {
                 Image("\(attraction.icon)")
                     .resizable()
-                    .padding(size*0.175)
+                    .padding(size*0.25)
                     .background(Color.theme.background)
                     .frame(width: size, height: size)
                     .clipShape(Circle())

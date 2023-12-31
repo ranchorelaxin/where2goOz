@@ -24,27 +24,10 @@ struct MapView: View {
             ZStack {
                 Map(position: $camera, interactionModes: [.zoom, .pan, .rotate]) {
                     ForEach(attractions) { attraction in
-                        let color = attraction.isComplete() ? Color.theme.greenColor : Color.theme.redColor
                         
                         Annotation(coordinate: attraction.coordinate) {
-                            VStack(spacing: 0) {
-                                Image(attraction.icon)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 20)
-                                    .padding(10)
-                                    .colorInvert()
-                                    .background(color)
-                                    .clipShape(Circle())
-                                
-                                Image(systemName: "triangle.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 10, height: 10)
-                                    .rotationEffect(Angle(degrees: 180))
-                                    .foregroundColor(color)
-                                    .offset(y: -3)
-                            }
+                            
+                            MapAttractionPin(attraction: attraction)
                             .onTapGesture {
                                 withAnimation {
                                     camera = MapCameraPosition.camera(MapCamera(centerCoordinate: attraction.coordinate, distance: distance))
@@ -53,17 +36,10 @@ struct MapView: View {
                             }
                         } label: {
                             Text("#\(attraction.rank) \(attraction.name)")
-                            
                         }
                     }
                 }
-                /*
-                 .onTapGesture {
-                 if active != nil {
-                 active = nil
-                 }
-                 }
-                 */
+                
                 if active != nil {
                     
                     VStack {
@@ -71,30 +47,11 @@ struct MapView: View {
                         NavigationLink {
                             AttractionView(attraction: active!)
                         } label: {
-                            HStack {
-                                AttractionImageIconView(attraction: Binding<Attraction> (
-                                    get: { active! },
-                                    set: { _ in  }
-                                ), size: 70)
-                                
-                                AttractionSummaryView(attraction: Binding<Attraction> (
-                                    get: { active! },
-                                    set: { _ in  }
-                                ))
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .padding()
-                                    .frame(width: 15)
-                                    .foregroundStyle(Color.theme.blueColor)
-                                
-                                
-                            }
-                            .padding()
-                            .background(Color.theme.background)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .shadow(radius: 10)
+                            MapCaptionView(attraction: $active)
+                                .padding()
+                                .background(Color.theme.background)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .shadow(radius: 10)
                         }
                         
                     }

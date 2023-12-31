@@ -18,7 +18,7 @@ struct MapRouteView: View {
     
     private let sectionFont = Font.title2.lowercaseSmallCaps().bold()
     
-    let attraction: Attraction
+    var attraction: Attraction
     
     var body: some View {
         VStack {
@@ -33,8 +33,8 @@ struct MapRouteView: View {
                 
                 Map(selection: $destinationMapItem) {
                     // Adding the marker for the starting point
-                    Marker("Start", coordinate: locationManager.coordinates)
-                    Marker("Finish", coordinate: CLLocationCoordinate2D(latitude: attraction.latitude, longitude: attraction.longitude))
+                    Marker("My Location", coordinate: locationManager.coordinates)
+                    Marker("\(attraction.name)", coordinate: CLLocationCoordinate2D(latitude: attraction.latitude, longitude: attraction.longitude))
                     // Show the route if it is available
                     if let route {
                         MapPolyline(route)
@@ -58,12 +58,24 @@ struct MapRouteView: View {
                 .padding([.top, .horizontal])
             }
         }
+        
+        .onTapGesture {
+            openMaps()
+        }
+         
         .onChange(of: destinationMapItem){
+            print("Getting directions")
             getDirections()
         }
         .onAppear {
-            self.destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: attraction.latitude, longitude: attraction.longitude)))
+            print("Updating...")
+            
             self.startMapItem = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.coordinates))
+            self.startMapItem?.name = "My Location"
+            
+            self.destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: attraction.latitude, longitude: attraction.longitude)))
+            self.destinationMapItem?.name = "\(attraction.name)"
+            
         }
     }
     
@@ -83,13 +95,15 @@ struct MapRouteView: View {
                 route = response.routes.first
                 setDistance(metres: response.routes.first!.distance)
             } catch {
+                print("Error \(error.localizedDescription)")
+                
                 return
             }
         }
     }
     
     func setDistance(metres: Double) {
-        
+        print("Metres: \(metres)")
         var formattedValue = ""
         
         if metres < 1000 {
@@ -98,17 +112,27 @@ struct MapRouteView: View {
             
         } else if metres <= 10000 {
             formattedValue = String(format: "%.2f", metres/1000)
+            self.distance = formattedValue + "km"
             
         } else if metres < 100000 {
             formattedValue = String(format: "%.1f", metres/1000)
+            self.distance = formattedValue + "km"
             
         } else {
             formattedValue = String(format: "%.0f", metres/1000)
+            self.distance = formattedValue + "km"
         }
         
-        self.distance = formattedValue + "km"
         
+    }
+    
+    func openMaps() {
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: attraction.coordinate))
+        mapItem.name = attraction.name
         
+        let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving] as [String : Any]
+        
+        MKMapItem.openMaps(with: [mapItem], launchOptions: options)
     }
 }
 
@@ -116,11 +140,4 @@ struct MapRouteView: View {
     MapRouteView(attraction: Attraction.attractions[0])
 }
 
-#Preview {
-    MapRouteView(attraction: Attraction.attractions[1])
-}
-
-#Preview {
-    MapRouteView(attraction: Attraction.attractions[3])
-}
 

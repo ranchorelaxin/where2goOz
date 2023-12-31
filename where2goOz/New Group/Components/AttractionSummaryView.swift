@@ -25,6 +25,7 @@ struct AttractionSummaryView: View {
             Text("\(attraction.getDistance(destinationLatitude: locationManager.coordinates.latitude, destinationLongitude: locationManager.coordinates.longitude).string)")
                 .font(Font.subheadline.lowercaseSmallCaps())
         }
+        .tint(Color.theme.accent)
     }
 }
 

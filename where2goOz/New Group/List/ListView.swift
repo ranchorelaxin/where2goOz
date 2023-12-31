@@ -143,6 +143,18 @@ struct ListView: View {
             modelContext.insert(attraction)
             attraction.attractionTypes!.append(fauna)
             
+            // insert Sydney Opera House
+            attraction = Attraction.attractions[8]
+            let perfArts = AttractionType(name: "Performing Arts", image: "performingarts", attractions: [])
+            modelContext.insert(attraction)
+            modelContext.insert(perfArts)
+            attraction.attractionTypes!.append(perfArts)
+            
+            // insert Wave Rock
+            attraction = Attraction.attractions[9]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(natural)
+            
             do {
                 try modelContext.save()
             } catch {
