@@ -38,19 +38,21 @@ struct AddressView: View {
         geocoder.reverseGeocodeLocation(CLLocation(latitude: attraction.latitude, longitude: attraction.longitude)) { placemark, error in
             if error == nil {
                 let mark = placemark![0]
+                address = ""
                 
-                address = "\(mark.description)"
-                
-                if mark.name != nil {
-                    address = mark.name!
+                if mark.thoroughfare != nil {
+                    address = address! + mark.thoroughfare! + ", "
+                }
+                else if mark.name != nil {
+                    address = mark.name! + ", "
                 }
                 
                 if mark.locality != nil {
-                    address = address! + ", " + mark.locality!
+                    address = address! + mark.locality! + ", "
                 }
                 
                 if mark.administrativeArea != nil {
-                    address = address! + ", " + mark.administrativeArea!
+                    address = address! + mark.administrativeArea!
                 }
 
             }

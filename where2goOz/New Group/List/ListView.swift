@@ -137,6 +137,12 @@ struct ListView: View {
             modelContext.insert(attraction)
             attraction.attractionTypes!.append(fauna)
             
+            
+            // insert Croc Cove
+            attraction = Attraction.attractions[7]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(fauna)
+            
             do {
                 try modelContext.save()
             } catch {

@@ -7,12 +7,14 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
 
 struct MainView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query(sort: [SortDescriptor(\Attraction.rankValue, order: .reverse)]) private var attractions: [Attraction]
     @Query private var completions: [CompletionData]
+    @EnvironmentObject private var locationManager: LocationManager
     
     var body: some View {
         TabView {
@@ -22,7 +24,7 @@ struct MainView: View {
                     Label("List", systemImage: "list.bullet.circle")
                 }
             
-            MapView()
+            MapView(camera: MapCameraPosition.camera(locationManager.camera))
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }

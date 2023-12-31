@@ -7,6 +7,8 @@
 
 import Foundation
 import CoreLocation
+import MapKit
+import _MapKit_SwiftUI
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var authorizationStatus: CLAuthorizationStatus
@@ -57,6 +59,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             return CLLocationCoordinate2D(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude)
         } else {
             return CLLocationCoordinate2D(latitude: -33.9535, longitude: 115.06)
+        }
+    }
+    
+    var camera: MapCamera {
+        if currentLocation != nil {
+            return MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude), distance: 10000)
+            
+        } else {
+            return MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: -33.9535, longitude: 115.06), distance: 10000)
+            
         }
     }
      

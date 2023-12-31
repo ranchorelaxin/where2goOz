@@ -29,8 +29,10 @@ struct where2goOzApp: App {
 
     var body: some Scene {
         WindowGroup {
+            
             MainView()
                 .environmentObject(locationManager)
+            
         }
         .modelContainer(sharedModelContainer)//
     }
