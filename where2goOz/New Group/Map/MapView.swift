@@ -17,52 +17,63 @@ struct MapView: View {
     
     @State var camera: MapCameraPosition
     @State var distance: Double = 10000
-    @State var active: Attraction?
+    @State var selected: Attraction?
     
     var body: some View {
         NavigationStack {
             ZStack {
+                
                 Map(position: $camera, interactionModes: [.zoom, .pan, .rotate]) {
+                    
+                    UserAnnotation()
+                    
+                    
                     ForEach(attractions) { attraction in
                         
                         Annotation(coordinate: attraction.coordinate) {
                             
                             MapAttractionPin(attraction: attraction)
                             .onTapGesture {
+                                
                                 withAnimation {
                                     camera = MapCameraPosition.camera(MapCamera(centerCoordinate: attraction.coordinate, distance: distance))
-                                    active = attraction
+                                    selected = attraction
                                 }
+                                
                             }
                         } label: {
                             Text("#\(attraction.rank) \(attraction.name)")
                         }
                     }
                 }
+                .mapControls {
+                    MapCompass()
+                    MapUserLocationButton()
+                    MapScaleView()
+                    MapPitchToggle()
+                }
+                .mapStyle(.standard(elevation: .realistic))
                 
-                if active != nil {
+                if let selected {
                     
                     VStack {
                         Spacer()
                         NavigationLink {
-                            AttractionView(attraction: active!)
+                            AttractionView(attraction: selected)
                         } label: {
-                            MapCaptionView(attraction: $active)
+                            MapCaptionView(attraction: $selected)
                                 .padding()
                                 .background(Color.theme.background)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .shadow(radius: 10)
                         }
-                        
                     }
                     .padding(5)
                     .toolbarTitleDisplayMode(.inline)
                     .toolbar(.hidden)
-                    
+                 
                 }
-                
             }
-            
         }
     }
 }
