@@ -17,99 +17,56 @@ struct AttractionView: View {
     var body: some View {
         ScrollView {
             
-            Map(initialPosition: MapCameraPosition.region(MKCoordinateRegion(center: attraction.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)), interactionModes: MapInteractionModes()) {
-                
-                Marker("\(attraction.name)", coordinate: attraction.coordinate)
-                    .tint(attraction.isComplete() ? Color.theme.greenColor : Color.theme.redColor)
-                
-            }
-            .frame(height: 250)
-            .ignoresSafeArea()
-            .overlay(alignment: .bottom) {
+            // Map with image overlay
+            VStack {
+                Map(initialPosition: MapCameraPosition.region(MKCoordinateRegion(center: attraction.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)), interactionModes: MapInteractionModes()) {
+                    
+                    Marker("\(attraction.name)", coordinate: attraction.coordinate)
+                        .tint(attraction.isComplete() ? Color.theme.greenColor : Color.theme.redColor)
+                    
+                }
+                .frame(height: 250)
+                .ignoresSafeArea()
+                .overlay(alignment: .bottom) {
                     AttractionImageIconView(attraction: $attraction, size: 100)
                         .offset(y: 50)
-            }
-            
-            VStack {
-                Text("\(attraction.name)")
-                    .multilineTextAlignment(.center)
-                    .bold()
-                    .font(.title)
-                
-                
-                if !(attraction.alternateNames == nil) {
-                    ForEach(attraction.alternateNames!, id: \.self) { altName in
-                        Text(" \(altName) ")
-                            .italic()
-                    }
                 }
-            }
-            .padding(.top, 50)
-            .padding()
-            
-            VStack {
-                 AddressView(attraction: attraction)
+                .padding(.bottom, 50)
             }
             
-            VStack {
-                
-                AttractionTypeView(attraction: attraction)
-                
-            }
-            
-            Text("\(attraction.summary)")
+
+            // Attraction title with alternate names as required
+            AttractionTitleView(attraction: attraction)
                 .padding()
             
-            VStack {
-                
-                MapLookAroundView(attraction: attraction)
-                    
-            }
+            // Address text if found online
+            AddressView(attraction: attraction)
+                .padding(.horizontal)
             
-            VStack {
-                
-                MapRouteView(attraction: attraction)
-                
-            }
+            // Grid of relevent types using image and text
+            AttractionTypeView(attraction: attraction)
+                .padding()
+            
+            AttractionTextSummaryView(attraction: attraction)
+            
+            MapLookAroundView(attraction: attraction)
+            
+            MapRouteView(attraction: attraction)
             
             if attraction.links != nil {
+                
                 AttractionLinksView(links: attraction.links!)
+                    .padding()
             }
             
-            VStack(alignment: .leading, spacing: 15) {
+            if attraction.imageCredit != nil {
                 
-                HStack {
-                    Text("Licencing")
-                        .font(sectionFont)
-                    Spacer()
-                }
-                
-                if attraction.imageCredit != nil {
-                    
-                    HStack {
-                        Text("Photo credit: \(attraction.imageCredit!)")
-                            .font(.caption)
-                            .italic()
-                        
-                        Spacer()
-                    }
-                }
-                
-                HStack(spacing: 2) {
-                    Text("Icons by ")
-                    
-                    Link(destination: URL(string: "https://icons8.com")!, label: {
-                        Text("Icons8.com")
-                            .underline()
-                    })
-                    
-                    Spacer()
-                }
-                .font(.caption)
+                AttractionImageCreditView(imageCredit: attraction.imageCredit!)
+                    .padding()
             }
-            .padding()
             
             Spacer()
+            
         }
     }
 }
@@ -118,3 +75,61 @@ struct AttractionView: View {
     AttractionView(attraction: Attraction.attractions[0])
         .environmentObject(LocationManager.shared)
 }
+
+struct AttractionTitleView: View {
+    
+    var attraction: Attraction
+    
+    var body: some View {
+        
+        VStack {
+            Text("\(attraction.name)")
+                .multilineTextAlignment(.center)
+                .bold()
+                .font(.title)
+            
+            
+            if !(attraction.alternateNames == nil) {
+                ForEach(attraction.alternateNames!, id: \.self) { altName in
+                    Text(" \(altName) ")
+                        .italic()
+                }
+            }
+        }
+    }
+}
+
+struct AttractionTextSummaryView: View {
+    
+    var attraction: Attraction
+    private let sectionFont = Font.title2.lowercaseSmallCaps().bold()
+    
+    var body: some View {
+        
+        VStack(spacing: 10) {
+            HStack {
+                Text("About")
+                    .font(sectionFont)
+                
+                Spacer()
+            }
+            
+            Text("\(attraction.summary)")
+        }
+        .padding()
+    }
+}
+
+/*
+ HStack(spacing: 2) {
+ Text("Icons by ")
+ 
+ Link(destination: URL(string: "https://icons8.com")!, label: {
+ Text("Icons8.com")
+ .underline()
+ })
+ 
+ Spacer()
+ }
+ .font(.caption)
+ */

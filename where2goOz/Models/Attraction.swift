@@ -39,6 +39,23 @@ final class Attraction {
         self.attractionTypes = attractionTypes
     }
     
+    init(id: UUID, name: String, alternateNames: [String]? = nil, icon: String, imageCredit: String? = nil, coordinates: String, links: [String]? = nil, summary: String, rankValue: Double, attractionTypes: [AttractionType]) {
+        self.id = id
+        self.name = name
+        self.alternateNames = alternateNames
+        self.icon = icon
+        self.imageCredit = imageCredit
+        self.links = links
+        self.summary = summary
+        self.rankValue = rankValue
+        self.attractionTypes = attractionTypes
+        
+        let coordStrings = coordinates.components(separatedBy: ", ")
+        
+        self.latitude = Double(coordStrings[0]) ?? 0
+        self.longitude = Double(coordStrings[1]) ?? 0
+    }
+    
     public var coordinate: CLLocationCoordinate2D {
         
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -111,6 +128,22 @@ final class Attraction {
     
     Attraction.init(id: UUID(uuidString: "583AB7C4-5219-4EC4-9BDB-89EDE014E282")!, name: "Wave Rock", alternateNames: ["Katter Kich"], icon: "naturalfeatures", imageCredit: "https://en.wikipedia.org/wiki/Wave_Rock", latitude: -32.4437871779799, links: ["https://en.wikipedia.org/wiki/Wave_Rock", "#waverock"], longitude: 118.89725104109468, summary: "Wave Rock (Nyungar: Katter Kich) is a natural rock formation that is shaped like a tall breaking ocean wave. The 'wave' is about 15 m (50 ft) high and around 110 m (360 ft) long. It forms the north side of a solitary hill, which is known as 'Hyden Rock'.\n\n This hill, which is a granite inselberg, lies about 3 km (2 mi) east of the small town of Hyden and 296 km (184 mi) east-southeast of Perth, Western Australia. Wave Rock and Hyden Rock are part of a 160 ha (395-acre) nature reserve, Hyden Wildlife Park. More than 100,000 tourists visit every year.", rankValue: 94.9, attractionTypes: []),
     
+    Attraction.init(id: UUID(uuidString: "2837C17B-7AF4-4244-A1AB-4BB0FE4A0FBC")!, name: "Wineglass Bay", icon: "beaches", latitude: -42.16644026602042, links: ["https://www.wineglassbay.com", "https://www.discovertasmania.com.au/regions/east-coast/wineglass-bay/", "#wineglassbay"], longitude: 148.297318886550, summary: "The perfect curve of Wineglass Bay is like a big, brilliant smile on the face of Tasmania. It takes some effort to see it, turning a trip to this famous beach into a pilgrimage of sorts.\n\nIt’s the star of Freycinet National Park, which occupies most of Freycinet Peninsula on Tasmania’s east coast. Climb to a low mountain saddle on a well-groomed trail to find the Wineglass Bay Lookout poised above the bay (60-90min return, 1.3km each way), and then follow the granite slopes down to the beach, stepping out onto its quartzite-white sands pressed between mountains.", rankValue: 98.8, attractionTypes: []),
+    
+    Attraction.init(id: UUID(uuidString: "4B2496EC-FDE0-4B60-9873-42781725272B")!, name: "Cable Beach Camel Ride", icon: "wildlife", latitude: -17.92584171521568, links: ["https://www.visitbroome.com.au/tours/camel-rides", "#cablebeachcamels"], longitude: 122.21038351743621, summary: "It doesn't get more iconic that a camel ride along the beautiful Cable Beach in Broome. Cable Beach is 22kms of pristine white sand and clear tropical waters and a popular way to enjoy the views is from the top of a camel. Broome has three camel tour operators, each with a different colour blankets. Red Sun Camels is famously red. Broome Camel Safaris have the blue blankets and Cable Beach Camels use the gold blankets. Each and every camel is a character and all tour experiences are sure to leave you with wonderful memories.\n\n We have three tour operators offering camel ride options including the famous sunset ride, morning rides are available seasonally and the slightly shorter pre-sunset rides. The pre-sunset rides are a great option for those with little ones or happy to enjoy an earlier departure time.", rankValue: 98.35, attractionTypes: []),
+    
+    Attraction.init(id: UUID(uuidString: "A32D9E57-9419-4FF1-AEFA-F6203D57B1EA")!, name: "Kata Tjuta", alternateNames: ["The Olgas"], icon: "naturalfeatures", latitude: -25.297988109795853, links: ["https://northernterritory.com/uluru-and-surrounds/destinations/kata-tjuta-the-olgas", "https://en.wikipedia.org/wiki/Kata_Tjuta", "#katatjuta"], longitude: 130.70644933275364, summary: "Australia’s Red Centre is home to natural wonder and cultural landmark, Kata Tjuta (the Olgas). Hike around the soaring rock domes, which glow at sunrise and sunset. Located approximately 40km west of Uluru, the ochre-coloured shapes are an intriguing and mesmerising sight.", rankValue: 92.95, attractionTypes: []),
+    
+    Attraction(id: UUID(uuidString: "B9B83A2D-F131-4BD6-9AE1-657B058D1BD6")!, name: "Wilpena Pound", alternateNames: ["Ikara"], icon: "naturalfeatures", coordinates: "-31.558333125641905, 138.56879207837306", links: ["https://en.wikipedia.org/wiki/Wilpena_Pound", "#wilpenapound"], summary: "Wilpena Pound ('Ikara' in the Adnyamathanha language[1]) is a natural amphitheatre of mountains located 429 kilometres (267 mi) north of Adelaide, South Australia, Australia in the heart of the Ikara-Flinders Ranges National Park. Its fringe is accessible by a sealed road between the towns of Hawker to the south and Blinman in the northern Flinders Ranges.", rankValue: 88.5, attractionTypes: []),
+    
+    Attraction(id: UUID(uuidString: "C4E8B69B-A676-4286-9AF2-D0E8C2E80908")!, name: "Whitehaven Beach", icon: "beaches", coordinates: "-20.2825633079514, 149.03865343722597", links: ["https://www.tourismwhitsundays.com.au/whitehaven-beach/", "#whitehavenbeach"], summary: "Crystal-clear water and pristine untouched coastline. Sink your toes into the white silica sands of the renowned and award-winning Whitehaven Beach, one of the many jewels in The Whitsundays crown.", rankValue: 97.3, attractionTypes: [])
+    
  ]
  }
  
+/*
+ Attraction.init(id: UUID(), name: "", icon: "", latitude: -0, links: ["", "", "#"], longitude: 0, summary: "", rankValue: 0.0, attractionTypes: [])
+ 
+ Attraction(id: UUID(), name: "", alternateNames: [""], icon: "", coordinates: "", links: ["", "#"], summary: "", rankValue: 0.0, attractionTypes: [])
+ 
+ */

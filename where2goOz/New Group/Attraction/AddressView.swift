@@ -23,7 +23,6 @@ struct AddressView: View {
                     
             }
         }
-        .padding(.horizontal)
         .onAppear(perform: {
             updateAddress()
         })

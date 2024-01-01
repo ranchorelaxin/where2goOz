@@ -27,3 +27,13 @@ extension UIApplication {
     }
     
 }
+
+/*
+extension Font {
+    static let theme = Font()
+    
+    struct FontTheme {
+        let sectionFont = Font.title2.lowercaseSmallCaps().bold()
+    }
+}
+*/

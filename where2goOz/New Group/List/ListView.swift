@@ -155,6 +155,42 @@ struct ListView: View {
             modelContext.insert(attraction)
             attraction.attractionTypes!.append(natural)
             
+            //insert Wineglass Bay
+            attraction = Attraction.attractions[10]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(beaches)
+            attraction.attractionTypes!.append(lookouts)
+            print("\(attraction.name): \(attraction.id)")
+            
+            // Insert Cable Beach Camels
+            attraction = Attraction.attractions[11]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(fauna)
+            attraction.attractionTypes!.append(experience)
+            print("\(attraction.name): \(attraction.id)")
+            
+            // insert Kata Tjuta
+            attraction = Attraction.attractions[12]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(natural)
+            print("\(attraction.name): \(attraction.id)")
+            
+            // Insert Wilpena Pound
+            attraction = Attraction.attractions[13]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(natural)
+            print("\(attraction.name): \(attraction.id)")
+            
+            // Insert Whitehaven
+            attraction = Attraction.attractions[14]
+            modelContext.insert(attraction)
+            attraction.attractionTypes!.append(beaches)
+            attraction.attractionTypes!.append(lookouts)
+            attraction.attractionTypes!.append(swimming)
+            print("\(attraction.name): \(attraction.id)")
+            
+            
+            
             do {
                 try modelContext.save()
             } catch {

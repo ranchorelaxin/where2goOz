@@ -27,12 +27,8 @@ struct AttractionTypeView: View {
 
                 }
                 .font(.caption)
-                .padding(.bottom, 10)
             }
         }
-        .padding(.top)
-        .padding(.horizontal)
-        
     }
 }
 

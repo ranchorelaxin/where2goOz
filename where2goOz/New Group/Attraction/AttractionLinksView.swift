@@ -13,92 +13,92 @@ struct AttractionLinksView: View {
     
     var body: some View {
         
-        HStack {
-            Text("Links")
-                .font(sectionFont)
-                .padding()
-            
-            Spacer()
-        }
+        VStack {
+            HStack {
+                Text("Links")
+                    .font(sectionFont)
+                
+                Spacer()
+            }
     
-        VStack(alignment: .leading) {
-            ForEach (links, id: \.self) { link in
-                
-                if link.hasPrefix("#") {
+            VStack(alignment: .leading) {
+                ForEach (links, id: \.self) { link in
                     
-                    let url = URL(string: "https://www.instagram.com/explore/tags/\(link.dropFirst())")
-                    HStack {
-                        Image("hashtag")
-                            .resizable()
-                            .frame(width: 25, height: 25)
+                    if link.hasPrefix("#") {
                         
-                        Link(destination: url!, label: {
-                            Text("\(link)")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        })
+                        let url = URL(string: "https://www.instagram.com/explore/tags/\(link.dropFirst())")
+                        HStack {
+                            Image("hashtag")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            
+                            Link(destination: url!, label: {
+                                Text("\(link)")
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            })
+                        }
+                    } else if link.contains("instagram") {
+                        let url = URL(string: "\(link)")
+                        HStack {
+                            Image("instagram")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            Link(destination: url!, label: {
+                                Text("\(link)")
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            })
+                        }
                     }
-                } else if link.contains("instagram") {
-                    let url = URL(string: "\(link)")
-                    HStack {
-                        Image("instagram")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        Link(destination: url!, label: {
-                            Text("\(link)")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        })
-                    }
-                }
-                
-                else if link.hasPrefix("http") || link.hasPrefix("www"){
-                    let url = URL(string: "\(link)")
                     
-                    HStack(alignment: .center) {
-                        Image("website")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        Link(destination: url!, label: {
-                            Text("\(link)")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        })
-                        Spacer()
-                    }
-                }
-                
-                else if link.contains("facebook") {
-                    let url = URL(string: "\(link)")
-                    HStack(spacing: 0) {
-                        Image("facebook")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        Link(destination: url!, label: {
-                            Text("\(link)")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        })
-                    }
-                } else {
-                    let url = URL(string: "\(link)")
-                    HStack(spacing: 0) {
+                    else if link.hasPrefix("http") || link.hasPrefix("www"){
+                        let url = URL(string: "\(link)")
                         
-                        Link(destination: url!, label: {
-                            Text("\(link)")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        })
+                        HStack(alignment: .center) {
+                            Image("website")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            Link(destination: url!, label: {
+                                Text("\(link)")
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            })
+                            Spacer()
+                        }
                     }
                     
+                    else if link.contains("facebook") {
+                        let url = URL(string: "\(link)")
+                        HStack(spacing: 0) {
+                            Image("facebook")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            Link(destination: url!, label: {
+                                Text("\(link)")
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            })
+                        }
+                    } else {
+                        let url = URL(string: "\(link)")
+                        HStack(spacing: 0) {
+                            
+                            Link(destination: url!, label: {
+                                Text("\(link)")
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            })
+                        }
+                        
+                    }
                 }
             }
-            .padding(.horizontal)
         }
     }
 }

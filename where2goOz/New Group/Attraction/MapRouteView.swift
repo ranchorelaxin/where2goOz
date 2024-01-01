@@ -26,10 +26,10 @@ struct MapRouteView: View {
                 HStack {
                     Text("Navigation")
                         .font(sectionFont)
-                        .padding()
                     
                     Spacer()
                 }
+                .padding(.horizontal)
                 
                 Map(selection: $destinationMapItem) {
                     // Adding the marker for the starting point
@@ -55,7 +55,7 @@ struct MapRouteView: View {
                 }
                 .frame(height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                .padding([.top, .horizontal])
+                .padding()
             }
         }
         

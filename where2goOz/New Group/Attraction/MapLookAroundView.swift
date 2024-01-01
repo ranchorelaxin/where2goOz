@@ -28,7 +28,7 @@ struct MapLookAroundView: View {
                     }
                     .frame(height: 128)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding([.top, .horizontal])
+                    .padding()
                     
             }
         }
