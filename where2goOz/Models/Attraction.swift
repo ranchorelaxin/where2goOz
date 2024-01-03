@@ -56,6 +56,23 @@ final class Attraction {
         self.longitude = Double(coordStrings[1]) ?? 0
     }
     
+    static func filterByCompletionStatus(attractions: [Attraction], status: CompletionStatus) -> [Attraction] {
+        
+        if status == .all {
+            return attractions
+        }
+        else if status == .complete {
+            return attractions.filter { attraction in
+                attraction.isComplete()
+            }
+        } else {
+            return attractions.filter { attraction in
+                !attraction.isComplete()
+            }
+        }
+        
+    }
+    
     public var coordinate: CLLocationCoordinate2D {
         
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

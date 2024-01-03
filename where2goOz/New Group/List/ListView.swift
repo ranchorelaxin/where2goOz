@@ -14,11 +14,28 @@ struct ListView: View {
     @Query(sort: [SortDescriptor(\Attraction.rank, order: .forward)]) private var attractions: [Attraction]
     @Query private var completions: [CompletionData]
     @Query private var types: [AttractionType]
+    
+    @State var searchText: String = ""
+    
+    @State var showFilter: Bool = false
+    @State var completionStatus: CompletionStatus = .all
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
-                ForEach(attractions) { attraction in
+                
+                ForEach(attractions.filter({ attraction in
+                    attraction.name.contains(searchText) || searchText == ""
+                }).filter({ attraction in
+                    if completionStatus == .all {
+                        return true
+                    } else if completionStatus == .complete {
+                        return attraction.isComplete()
+                    } else {
+                        return !attraction.isComplete()
+                    }
+                })) { attraction in
+                    
                     NavigationLink {
                         AttractionView(attraction: attraction)
                     }
@@ -32,26 +49,38 @@ struct ListView: View {
                 .onDelete(perform: deleteItems)
             }
             .listStyle(.inset)
+            .searchable(text: $searchText)
             
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    Button(action: {
+                        showFilter = true
+                    }, label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    })
+                    
+                }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
                     Button(action: addData) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
         .onAppear {
             
             locationManager.requestPermission()
             
         }
+        .navigationTitle("Attractions")
+        .sheet(isPresented: $showFilter) {
+            showFilter = false
+        } content: {
+            FilterSheetView(completionStatus: $completionStatus)
+        }
+
     }
 
     private func addData() {
@@ -198,6 +227,11 @@ struct ListView: View {
             }
         }
     }
+    
+    private func addJunkAttractions(number: Int) {
+        // Up to here.. add (and delete large amounts of data to check filter lag
+        
+    }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
@@ -209,10 +243,11 @@ struct ListView: View {
     
     
 }
-
+/*
 #Preview {
     ListView()
         .modelContainer(for: Attraction.self, inMemory: true)
         .environmentObject(LocationManager.shared)
         
 }
+*/

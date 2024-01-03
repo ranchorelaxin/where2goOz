@@ -26,6 +26,8 @@
 		0D471F592B3AAF1A000899A0 /* AttractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D471F582B3AAF1A000899A0 /* AttractionType.swift */; };
 		0D471F5B2B3ABDC8000899A0 /* AttractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D471F5A2B3ABDC8000899A0 /* AttractionView.swift */; };
 		0D82AC702B4119B5005EBD31 /* MapAttractionPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82AC6F2B4119B5005EBD31 /* MapAttractionPin.swift */; };
+		0D98ED752B45666B002871EE /* FilterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98ED742B45666B002871EE /* FilterSheetView.swift */; };
+		0D98ED772B4566AC002871EE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98ED762B4566AC002871EE /* Enums.swift */; };
 		0DB56FDC2B403C9D00A73BAA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB56FDB2B403C9D00A73BAA /* MainView.swift */; };
 		0DB56FE12B40456500A73BAA /* AttractionImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB56FE02B40456500A73BAA /* AttractionImageIconView.swift */; };
 		0DB56FE32B4050B100A73BAA /* AttractionSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB56FE22B4050B100A73BAA /* AttractionSummaryView.swift */; };
@@ -54,6 +56,8 @@
 		0D471F582B3AAF1A000899A0 /* AttractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionType.swift; sourceTree = "<group>"; };
 		0D471F5A2B3ABDC8000899A0 /* AttractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionView.swift; sourceTree = "<group>"; };
 		0D82AC6F2B4119B5005EBD31 /* MapAttractionPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAttractionPin.swift; sourceTree = "<group>"; };
+		0D98ED742B45666B002871EE /* FilterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheetView.swift; sourceTree = "<group>"; };
+		0D98ED762B4566AC002871EE /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0DB56FDB2B403C9D00A73BAA /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = where2goOz/MainView.swift; sourceTree = SOURCE_ROOT; };
 		0DB56FE02B40456500A73BAA /* AttractionImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionImageIconView.swift; sourceTree = "<group>"; };
 		0DB56FE22B4050B100A73BAA /* AttractionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionSummaryView.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				0D471F542B3AA40F000899A0 /* Attraction.swift */,
 				0D471F582B3AAF1A000899A0 /* AttractionType.swift */,
 				0D3EEC152B3DA2AB003DFEF7 /* CompletionData.swift */,
+				0D98ED762B4566AC002871EE /* Enums.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			children = (
 				0DB56FE22B4050B100A73BAA /* AttractionSummaryView.swift */,
 				0DB56FE02B40456500A73BAA /* AttractionImageIconView.swift */,
+				0D98ED742B45666B002871EE /* FilterSheetView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -254,12 +260,14 @@
 				0D3EEC0A2B3D312C003DFEF7 /* MapRouteView.swift in Sources */,
 				0DB56FE32B4050B100A73BAA /* AttractionSummaryView.swift in Sources */,
 				0D471F5B2B3ABDC8000899A0 /* AttractionView.swift in Sources */,
+				0D98ED772B4566AC002871EE /* Enums.swift in Sources */,
 				0DB56FDC2B403C9D00A73BAA /* MainView.swift in Sources */,
 				0D3EEC142B3DA1A8003DFEF7 /* Extensions.swift in Sources */,
 				0D2A11E62B419D6F00049A7C /* AttractionLinksView.swift in Sources */,
 				0D82AC702B4119B5005EBD31 /* MapAttractionPin.swift in Sources */,
 				0D3EEC122B3D9445003DFEF7 /* ListTileView.swift in Sources */,
 				0D3EEC102B3D9131003DFEF7 /* MapView.swift in Sources */,
+				0D98ED752B45666B002871EE /* FilterSheetView.swift in Sources */,
 				0D3EEC082B3D20E0003DFEF7 /* MapLookAroundView.swift in Sources */,
 				0DB56FE12B40456500A73BAA /* AttractionImageIconView.swift in Sources */,
 				0D3EEC0C2B3D3A99003DFEF7 /* LocationManager.swift in Sources */,
