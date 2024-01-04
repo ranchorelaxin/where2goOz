@@ -15,29 +15,32 @@ struct MapView: View {
     @EnvironmentObject var locationManager: LocationManager
     @Query private var attractions: [Attraction]
     
-    @State var camera: MapCameraPosition
-    @State var distance: Double = 10000
+    @State var cameraPosition: MapCameraPosition// = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -15, longitude: 130), span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)))
+    @State var cameraDistance: Double = 0
+
+    
     @State var selected: Attraction?
     
     var body: some View {
         NavigationStack {
             ZStack {
                 
-                Map(position: $camera, interactionModes: [.zoom, .pan, .rotate]) {
+                Map(position: $cameraPosition, interactionModes: [.zoom, .pan, .rotate]) {
                     
                     UserAnnotation()
-                    
                     
                     ForEach(attractions) { attraction in
                         
                         Annotation(coordinate: attraction.coordinate) {
-                            
+                            // perhaps make attraction also an MKMapItem before loading onto map??
                             MapAttractionPin(attraction: attraction)
                             .onTapGesture {
                                 
                                 withAnimation {
-                                    camera = MapCameraPosition.camera(MapCamera(centerCoordinate: attraction.coordinate, distance: distance))
+                                    
+                                    cameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: attraction.coordinate, distance: cameraDistance))
                                     selected = attraction
+                                    
                                 }
                                 
                             }
@@ -46,6 +49,16 @@ struct MapView: View {
                         }
                     }
                 }
+                .onTapGesture {
+                    if selected != nil {
+                        selected = nil
+                    }
+                    
+                }
+                .onMapCameraChange { mapCameraUpdateContext in
+                    self.cameraDistance = mapCameraUpdateContext.camera.distance
+                }
+                
                 .mapControls {
                     MapCompass()
                     MapUserLocationButton()
@@ -69,11 +82,12 @@ struct MapView: View {
                         }
                     }
                     .padding(5)
-                    .toolbarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
                  
                 }
             }
         }
+        .ignoresSafeArea(edges: .all)
+        .toolbarTitleDisplayMode(.inline)
+        .toolbar(.hidden)
     }
 }

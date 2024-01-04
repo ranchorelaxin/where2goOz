@@ -52,7 +52,23 @@ struct ListView: View {
             .searchable(text: $searchText)
             
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        addJunkAttractions(count: 200)
+                    }) {
+                        Label("Add Items", systemImage: "goforward.plus")
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        removeJunkAttractions()
+                    }) {
+                        Label("Add Items", systemImage: "gobackward.minus")
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
                     
                     Button(action: {
                         showFilter = true
@@ -62,7 +78,7 @@ struct ListView: View {
                     
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button(action: addData) {
                         Label("Add Item", systemImage: "plus")
                     }
@@ -228,9 +244,58 @@ struct ListView: View {
         }
     }
     
-    private func addJunkAttractions(number: Int) {
-        // Up to here.. add (and delete large amounts of data to check filter lag
+    private func addJunkAttractions(count: Int) {
+        /*
+         var attraction = Attraction.attractions[0]
+         
+         let natural = AttractionType(name: "Natural Features", image: "naturalfeatures", attractions: [])
+         
+         let lookouts = AttractionType(name: "Lookouts", image: "lookouts", attractions: [])
+         
+         modelContext.insert(attraction)
+         modelContext.insert(natural)
+         modelContext.insert(lookouts)
+         
+         attraction.attractionTypes!.append(natural)
+         attraction.attractionTypes!.append(lookouts)
+
+         */
         
+        for number in 1...count {
+            
+            let latitude = Double.random(in: -41 ... -12)
+            let longitude = Double.random(in: 115 ... 147)
+            let rankValue = Double.random(in: 1 ... 90)
+            
+            let attraction = Attraction(id: UUID(), name: "Random Attraction #\(number)", icon: "naturalfeatures", latitude: latitude, longitude: longitude, summary: "This is a summary", rankValue: rankValue, attractionTypes: [])
+            
+            modelContext.insert(attraction)
+            
+            for type in types {
+                let i = Int.random(in: 1 ... 5)
+                if i > 3 {
+                    attraction.attractionTypes!.append(type)
+                }
+            }
+            do {
+                try modelContext.save()
+            } catch {
+                print("Error")
+            }
+        }
+    }
+    
+    private func removeJunkAttractions() {
+        for attraction in attractions {
+            if attraction.name.contains("Random") {
+                modelContext.delete(attraction)
+            }
+            do {
+                try modelContext.save()
+            } catch {
+                print("Error")
+            }
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {

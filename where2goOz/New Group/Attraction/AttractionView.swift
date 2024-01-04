@@ -68,7 +68,10 @@ struct AttractionView: View {
             Spacer()
             
         }
+        .toolbarTitleDisplayMode(.inline)
+        
     }
+        
 }
 
 #Preview {

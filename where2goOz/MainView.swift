@@ -24,7 +24,7 @@ struct MainView: View {
                     Label("List", systemImage: "list.bullet.circle")
                 }
             
-            MapView(camera: MapCameraPosition.camera(locationManager.camera))
+            MapView(cameraPosition: MapCameraPosition.camera(locationManager.camera))
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
